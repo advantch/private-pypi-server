@@ -171,4 +171,5 @@ override.tf.json
 
 # Ignore CLI configuration files
 .terraformrc
+.idea/*
 terraform.rc
