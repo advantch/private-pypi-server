@@ -1,32 +1,35 @@
-# Self Hosted Private PyPi Server
+# Terraform, Selfhosted Package Index
 
-Supporting repo for Terraform Pypiserver tutorial on advantch.com
+Supporting repo for Terraform tutorial on advantch.com -Part 1
 
 ## Installation
 
-See the instructions on the [terraform website](https://learn.hashicorp.com/terraform?utm_source=terraform_io) to install terraform.
-
-
-```bash
-pip install foobar
-```
+Visit the [terraform website](https://learn.hashicorp.com/terraform?utm_source=terraform_io) to install terraform.
 
 ## Usage
 
 ```shell
-terraform init
+# initialize
+terraform init 
 
 # create resources
-terraform apply
+terraform apply -var-file='.tfvars'
 
 # destroy resources
-terraform destroy
+terraform destroy -var-file='.tfvars'
 ```
+
+## Interacting with remote host
+```shell
+$ docker context create pypiserver --docker "host=ssh://root@your_ip"
+$ docker context use pypiserver
+$ docker-compose ‐‐context pypiserver up -d
+```
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -1,8 +1,8 @@
 
-resource "digitalocean_droplet" "www-1" {
-  image = "docker-18-04"
-  name = "server"
-  region = "nyc2"
+resource "digitalocean_droplet" "pypiserver" {
+  image = "docker-20-04"
+  name = "pypiserver"
+  region = "ams3"
   size = "s-1vcpu-1gb"
   private_networking = true
   ssh_keys = [
@@ -17,10 +17,16 @@ resource "digitalocean_droplet" "www-1" {
   }
   provisioner "remote-exec" {
     inline = [
+      # USING PROVISIONER IS NOT RECOMMENDED
       "export PATH=$PATH:/usr/bin",
-
       "sudo apt-get update",
+      "sudo apt install git",
+      "git clone https://github.com/advantch/private-pypi-server",
+      "cd private-pypi-server && docker-compose up -d --build",
+      "docker container ls",
 
+      "sudo ufw allow 80",
+      "curl ifconfig.me"
     ]
   }
 }
